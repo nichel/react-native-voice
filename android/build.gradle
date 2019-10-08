@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 repositories {
+    google()
     mavenLocal()
     jcenter()
     maven {
@@ -14,8 +15,8 @@ repositories {
     }
 }
 
-def DEFAULT_COMPILE_SDK_VERSION = 23
-def DEFAULT_BUILD_TOOLS_VERSION = "23.0.2"
+def DEFAULT_COMPILE_SDK_VERSION = 28
+def DEFAULT_BUILD_TOOLS_VERSION = "28.0.3"
 def DEFAULT_TARGET_SDK_VERSION = 23
 def DEFAULT_SUPPORT_LIB_VERSION = "23.1.1"
 
@@ -24,7 +25,7 @@ android {
     buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : DEFAULT_BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : DEFAULT_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
@@ -39,10 +40,11 @@ android {
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:3.5.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -58,8 +60,8 @@ allprojects {
 def supportVersion = rootProject.hasProperty('supportLibVersion') ? rootProject.supportLibVersion : DEFAULT_SUPPORT_LIB_VERSION
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:${supportVersion}'
-    compile 'com.facebook.react:react-native:+'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:${supportVersion}"
+    implementation 'com.facebook.react:react-native:+'
 }
